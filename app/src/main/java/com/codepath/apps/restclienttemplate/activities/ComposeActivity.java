@@ -5,10 +5,13 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.R;
@@ -30,6 +33,7 @@ public class ComposeActivity extends AppCompatActivity {
 
     EditText etCompose;
     Button btnTweet;
+    TextView tvCount;
 
     TwitterClient client;
     ActivityComposeBinding binding;
@@ -43,6 +47,10 @@ public class ComposeActivity extends AppCompatActivity {
 
         etCompose = binding.etCompose;
         btnTweet = binding.btnTweet;
+        tvCount = binding.tvCount;
+
+        final String tweetChars = getString(R.string.tweet_chars);
+        tvCount.setText(MAX_TWEET_LENGTH + tweetChars);
 
         btnTweet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +81,23 @@ public class ComposeActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        etCompose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                tvCount.setText(MAX_TWEET_LENGTH - editable.toString().length() + tweetChars);
             }
         });
     }

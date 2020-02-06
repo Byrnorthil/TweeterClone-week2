@@ -8,5 +8,6 @@
     <string name="compose_hint">What\'s happening?</string>
     <string name="tweet">Tweet</string>
     <string name="compose">Compose</string>
+    <string name="tweet_chars">\u0020chars left</string>
 
 </resources>
